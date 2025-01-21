@@ -27,4 +27,7 @@ public class Member {
 
     @OneToMany(mappedBy = "interview")
     private List<Interview> interviews;
+
+    @OneToMany(mappedBy = "project_member")
+    private List<ProjectMember> projectMembers;
 }

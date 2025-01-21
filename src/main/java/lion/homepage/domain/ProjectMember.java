@@ -5,17 +5,16 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Interview {
+public class ProjectMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "interview_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-    private String question;
-
-    private String answer;
 }
