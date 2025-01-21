@@ -16,13 +16,4 @@ import java.util.Optional;
 public class InterviewService {
     private final InterviewRepository interviewRepository;
 
-    @Transactional
-    public Long join(Interview interview) {
-        interviewRepository.save(interview);
-        return interview.getId();
-    }
-
-    public List<Interview> findAll() {
-        return interviewRepository.findAll();
-    }
 }
