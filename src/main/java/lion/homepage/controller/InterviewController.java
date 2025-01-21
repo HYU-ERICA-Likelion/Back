@@ -3,6 +3,7 @@ package lion.homepage.controller;
 import lion.homepage.domain.Interview;
 import lion.homepage.domain.Member;
 import lion.homepage.dto.InterviewDto;
+import lion.homepage.dto.MemberDescriptionDto;
 import lion.homepage.dto.MemberInterviewRequestDto;
 import lion.homepage.dto.MemberInterviewResponseDto;
 import lion.homepage.enums.Role;
@@ -26,12 +27,20 @@ public class InterviewController {
 
     @GetMapping("/interview")
     @ResponseBody
-    public MemberInterviewResponseDto interview(MemberInterviewRequestDto memberInterviewRequestDto) {
+    public MemberInterviewResponseDto getPersonalInterviews(MemberInterviewRequestDto memberInterviewRequestDto) {
         Member member = memberService.findMemberByNameAndGeneration(memberInterviewRequestDto.getName(), memberInterviewRequestDto.getGeneration());
         List<InterviewDto> interviewDtoList = member.getInterviews().stream()
                 .map(i -> new InterviewDto(i.getQuestion(), i.getAnswer())).toList();
-        return new MemberInterviewResponseDto(member.getPhotoUrl(), member.getName(),
-                makeGenerationAndRoleString(member.getGeneration(), member.getRole()), interviewDtoList);
+        return new MemberInterviewResponseDto(member.getPhotoUrl(), member.getName(), member.getGeneration(), member.getRole(), interviewDtoList);
+    }
+
+    @GetMapping("generation/interview")
+    @ResponseBody
+    public List<MemberDescriptionDto> getEveryMemberDescription() {
+        List<Member> members = memberService.findAll();
+        List<MemberDescriptionDto> memberDescriptionDtoList = members.stream()
+                .map(m -> new MemberDescriptionDto(m.getName(), m.getGeneration(), m.getRole(), m.getPhotoUrl(), m.getDescription())).toList();
+        return memberDescriptionDtoList;
     }
 
     private String makeGenerationAndRoleString(Integer generation, Role role) {
