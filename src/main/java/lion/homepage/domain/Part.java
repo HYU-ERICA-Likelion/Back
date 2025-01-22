@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -17,6 +18,6 @@ public class Part {
 
     private String description;
 
-    @OneToMany(mappedBy = "curriculum_id")
-    private List<Curriculum> curriculums;
+    @OneToMany(mappedBy = "part")
+    private List<Curriculum> curriculums = new ArrayList<>();
 }

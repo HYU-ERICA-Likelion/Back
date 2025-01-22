@@ -5,6 +5,7 @@ import lion.homepage.enums.Role;
 import lombok.Getter;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -25,9 +26,9 @@ public class Member {
 
     private String description;
 
-    @OneToMany(mappedBy = "interview")
-    private List<Interview> interviews;
+    @OneToMany(mappedBy = "member")
+    private List<Interview> interviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project_member")
-    private List<ProjectMember> projectMembers;
+    @OneToMany(mappedBy = "member")
+    private List<ProjectMember> projectMembers = new ArrayList<>();
 }

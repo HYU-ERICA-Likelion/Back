@@ -1,10 +1,12 @@
 package lion.homepage.domain;
 
 import jakarta.persistence.*;
+import lion.homepage.enums.Type;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Getter
@@ -18,7 +20,8 @@ public class Project {
 
     private String description;
 
-    private String type; // 타입 필드는 무슨 목적일까요?
+    @Enumerated(EnumType.STRING)
+    private Type type;
 
     private Integer generation;
 
@@ -28,9 +31,9 @@ public class Project {
 
     private String thumbnailUrl;
 
-    @OneToMany(mappedBy = "photo", cascade = CascadeType.REMOVE)
-    private List<Photo> photos;
+    @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
+    private List<Photo> photos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "project_member")
-    private List<ProjectMember> projectMember;
+    @OneToMany(mappedBy = "project")
+    private List<ProjectMember> projectMember = new ArrayList<>();
 }
