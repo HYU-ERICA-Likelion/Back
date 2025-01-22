@@ -12,12 +12,15 @@ import lion.homepage.repository.MemberRepository;
 import lion.homepage.service.InterviewService;
 import lion.homepage.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.CacheControl;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,10 +39,12 @@ public class InterviewController {
 
     @GetMapping("generation/interview")
     @ResponseBody
-    public List<MemberDescriptionDto> getEveryMemberDescription() {
+    public ResponseEntity<List<MemberDescriptionDto>> getEveryMemberDescription() {
         List<Member> members = memberService.findAll();
         List<MemberDescriptionDto> memberDescriptionDtoList = members.stream()
                 .map(m -> new MemberDescriptionDto(m.getName(), m.getGeneration(), m.getRole(), m.getPhotoUrl(), m.getDescription())).toList();
-        return memberDescriptionDtoList;
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.maxAge(60, TimeUnit.SECONDS))
+                .body(memberDescriptionDtoList);
     }
 }
