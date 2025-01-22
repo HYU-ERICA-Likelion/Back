@@ -42,8 +42,4 @@ public class InterviewController {
                 .map(m -> new MemberDescriptionDto(m.getName(), m.getGeneration(), m.getRole(), m.getPhotoUrl(), m.getDescription())).toList();
         return memberDescriptionDtoList;
     }
-
-    private String makeGenerationAndRoleString(Integer generation, Role role) {
-        return generation + " " + role;
-    }
 }
