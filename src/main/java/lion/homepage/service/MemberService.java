@@ -19,8 +19,8 @@ public class MemberService {
     public List<Member> findAll() {
         return memberRepository.findAll();
     }
-    public Member findMemberByNameAndGeneration(String name, Integer generation) {
-        return memberRepository.findByNameAndGeneration(name, generation)
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+
+    public Optional<Member> findMemberByNameAndGeneration(String name, Integer generation) {
+        return memberRepository.findByNameAndGeneration(name, generation);
     }
 }
