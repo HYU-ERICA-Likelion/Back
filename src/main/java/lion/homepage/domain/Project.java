@@ -3,6 +3,7 @@ package lion.homepage.domain;
 import jakarta.persistence.*;
 import lion.homepage.enums.Type;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 
 @Entity
 @Getter
+@Setter
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
