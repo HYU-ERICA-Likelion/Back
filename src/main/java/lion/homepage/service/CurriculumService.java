@@ -43,8 +43,6 @@ public class CurriculumService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid part Id:" + curriculumDto.getPartId()));
 
         Curriculum curriculum = new Curriculum();
-        // Set properties using builder or setter methods
-        // Note: You'll need to add appropriate setters in the Curriculum entity
         return curriculumRepository.save(curriculum).getId();
     }
 
@@ -52,8 +50,6 @@ public class CurriculumService {
     public void updateCurriculum(Long id, CurriculumDto curriculumDto) {
         Curriculum curriculum = curriculumRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid curriculum Id:" + id));
-        // Update properties
-        // Note: You'll need to add appropriate setters in the Curriculum entity
     }
 
     @Transactional
