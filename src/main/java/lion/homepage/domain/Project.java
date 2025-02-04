@@ -20,7 +20,13 @@ public class Project {
 
     private String name;
 
+    // 두 문장 정도의 프로젝트 설명 글
     private String description;
+
+    // 한 문단의 세부 프로젝트 설명 글
+    private String longDescription;
+
+    private String teamName;
 
     @Enumerated(EnumType.STRING)
     private Type type;

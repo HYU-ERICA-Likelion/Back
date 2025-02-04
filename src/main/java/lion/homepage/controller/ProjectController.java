@@ -66,7 +66,8 @@ public class ProjectController {
         return new ProjectResponseDto(
                 project.getId(),
                 project.getName(),
-                project.getDescription(),
+                project.getTeamName(),
+                project.getLongDescription(),
                 project.getType(),
                 project.getGeneration(),
                 project.getCreatedAt(),
