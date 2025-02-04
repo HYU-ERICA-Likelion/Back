@@ -27,7 +27,9 @@ public class Project {
 
     private Integer generation;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime startDate;
+
+    private LocalDateTime endDate;
 
     private String deploymentUrl;
 

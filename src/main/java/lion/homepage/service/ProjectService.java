@@ -26,7 +26,7 @@ public class ProjectService {
         return projectRepository.findByNameAndGeneration(name, generation);
     }
 
-    public Optional<Project> getProjectsByGeneration(Integer generation) {
+    public List<Project> getProjectsByGeneration(Integer generation) {
         return projectRepository.findByGeneration(generation);
     }
 

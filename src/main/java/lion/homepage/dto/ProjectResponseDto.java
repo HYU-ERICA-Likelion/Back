@@ -16,7 +16,8 @@ public class ProjectResponseDto {
     private String description;
     private Type type;
     private Integer generation;
-    private LocalDateTime createdAt;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private String deploymentUrl;
     private String thumbnailUrl;
     private List<PhotoDto> photos;

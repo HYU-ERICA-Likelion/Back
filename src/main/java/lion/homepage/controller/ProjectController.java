@@ -43,12 +43,14 @@ public class ProjectController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/generation/{generation}")
-    public ResponseEntity<ProjectResponseDto> getProjectsByGeneration(@PathVariable Integer generation) {
-        Optional<Project> project = projectService.getProjectsByGeneration(generation);
-        return project.map(p -> ResponseEntity.ok(convertToDto(p)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
+@GetMapping("/generation/{generation}")
+public ResponseEntity<List<ProjectResponseDto>> getProjectsByGeneration(@PathVariable Integer generation) {
+    List<Project> projects = projectService.getProjectsByGeneration(generation);
+    List<ProjectResponseDto> projectDtos = projects.stream()
+            .map(this::convertToDto)
+            .collect(Collectors.toList());
+    return ResponseEntity.ok(projectDtos);
+}
 
     @PostMapping
     public ResponseEntity<ProjectResponseDto> createProject(@RequestBody Project project) {
@@ -69,7 +71,8 @@ public class ProjectController {
                 project.getDescription(),
                 project.getType(),
                 project.getGeneration(),
-                project.getCreatedAt(),
+                project.getStartDate(),
+                project.getEndDate(),
                 project.getDeploymentUrl(),
                 project.getThumbnailUrl(),
                 project.getPhotos().stream().map(photo -> new PhotoDto(photo.getId(), photo.getPhotoUrl())).collect(Collectors.toList()),
