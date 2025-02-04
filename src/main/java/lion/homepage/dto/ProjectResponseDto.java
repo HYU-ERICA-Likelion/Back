@@ -10,10 +10,10 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class ProjectResponseDto {
-
     private Long id;
     private String name;
-    private String description;
+    private String teamName;
+    private String longDescription;
     private Type type;
     private Integer generation;
     private LocalDateTime startDate;
