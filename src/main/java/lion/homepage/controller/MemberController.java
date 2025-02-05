@@ -19,8 +19,8 @@ package lion.homepage.controller;
         private final MemberService memberService;
 
         @GetMapping
-        public ResponseEntity<List<MemberDescriptionDto>> getAllMembers() {
-            List<Member> members = memberService.findAll();
+        public ResponseEntity<List<MemberDescriptionDto>> getAllLeaders() {
+            List<Member> members = memberService.findNotNormalMembers();
             List<MemberDescriptionDto> memberDtos = members.stream()
                     .map(this::convertToDto)
                     .collect(Collectors.toList());
@@ -38,7 +38,7 @@ package lion.homepage.controller;
             return new MemberDescriptionDto(
                     member.getName(),
                     member.getGeneration(),
-                    member.getRole(),
+                    member.getRole().getKorean(),
                     member.getPhotoUrl(),
                     member.getDescription()
             );

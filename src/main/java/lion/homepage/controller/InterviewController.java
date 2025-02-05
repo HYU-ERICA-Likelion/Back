@@ -49,7 +49,7 @@ public class InterviewController {
     public ResponseEntity<List<MemberDescriptionDto>> getEveryMemberDescription() {
         List<Member> members = memberService.findAll();
         List<MemberDescriptionDto> memberDescriptionDtoList = members.stream()
-                .map(m -> new MemberDescriptionDto(m.getName(), m.getGeneration(), m.getRole(), m.getPhotoUrl(), m.getDescription())).toList();
+                .map(m -> new MemberDescriptionDto(m.getName(), m.getGeneration(), m.getRole().getKorean(), m.getPhotoUrl(), m.getDescription())).toList();
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(60, TimeUnit.SECONDS))
                 .body(memberDescriptionDtoList);

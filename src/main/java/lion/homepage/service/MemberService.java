@@ -23,4 +23,8 @@ public class MemberService {
     public Optional<Member> findMemberByNameAndGeneration(String name, Integer generation) {
         return memberRepository.findByNameAndGeneration(name, generation);
     }
+
+    public List<Member> findNotNormalMembers() {
+        return memberRepository.findALLByRoleNotNormal();
+    }
 }

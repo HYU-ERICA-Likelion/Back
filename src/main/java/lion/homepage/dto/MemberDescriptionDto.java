@@ -9,7 +9,7 @@ import lombok.Getter;
 public class MemberDescriptionDto {
     private String name;
     private Integer generation;
-    private Role role;
+    private String role;
     private String photoUrl;
     private String description;
 }
