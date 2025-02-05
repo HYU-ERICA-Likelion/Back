@@ -8,4 +8,5 @@ import lombok.Getter;
 public class InterviewDto {
     private String question;
     private String answer;
+
 }

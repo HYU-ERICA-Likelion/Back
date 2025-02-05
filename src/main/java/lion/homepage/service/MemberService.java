@@ -20,11 +20,19 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Optional<Member> findMemberByNameAndGeneration(String name, Integer generation) {
-        return memberRepository.findByNameAndGeneration(name, generation);
+
+    public Optional<Member> findById(Long id) {
+        return memberRepository.findById(id);
     }
 
-    public List<Member> findNotNormalMembers() {
-        return memberRepository.findALLByRoleNotNormal();
+    //기수별로 멤버 조회 추가해야함
+    public List<Member> getMembersByGeneration(Integer generation) {
+        return memberRepository.findByGenerationsId(generation);
     }
+
+
+    // 멤버가 기수 여러개 가질 수 있음 -> 멤버와 기수로 멤버 찾기하면 여러개가 나옴 -> 삭제
+//    public Optional<Member> findMemberByNameAndGeneration(String name, Integer generationId) {
+//        return memberRepository.findByNameAndGenerationsId(name, generationId);
+//    }
 }

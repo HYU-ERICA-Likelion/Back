@@ -1,5 +1,6 @@
 package lion.homepage.service;
 
+import lion.homepage.domain.Generation;
 import lion.homepage.domain.Project;
 import lion.homepage.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,12 @@ public class ProjectService {
         return projectRepository.findById(id);
     }
 
-    public Optional<Project> getProjectsByNameAndGeneration(String name, Integer generation) {
-        return projectRepository.findByNameAndGeneration(name, generation);
+    public Optional<Project> getProjectsByNameAndGeneration(String name, Integer generationId) {
+        return projectRepository.findByNameAndGenerationId(name, generationId);
     }
 
-    public Optional<Project> getProjectsByGeneration(Integer generation) {
-        return projectRepository.findByGeneration(generation);
+    public List<Project> getProjectsByGeneration(Integer generationId) {
+        return projectRepository.findByGenerationId(generationId);
     }
 
     public Project saveProject(Project project) {
