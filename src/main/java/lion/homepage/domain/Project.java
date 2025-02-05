@@ -1,7 +1,7 @@
 package lion.homepage.domain;
 
 import jakarta.persistence.*;
-import lion.homepage.enums.Type;
+import lion.homepage.enums.ProjectType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,7 +29,7 @@ public class Project {
     private String teamName;
 
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private ProjectType projectType;
 
     private LocalDateTime startDate;
 

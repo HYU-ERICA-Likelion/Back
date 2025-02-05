@@ -1,6 +1,6 @@
 package lion.homepage.dto;
 
-import lion.homepage.enums.Type;
+import lion.homepage.enums.ProjectType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -14,7 +14,7 @@ public class ProjectResponseDto {
     private String name;
     private String teamName;
     private String longDescription;
-    private Type type;
+    private ProjectType projectType;
     private Integer generation;
     private LocalDateTime startDate;
     private LocalDateTime endDate;

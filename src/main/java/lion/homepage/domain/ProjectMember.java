@@ -1,6 +1,7 @@
 package lion.homepage.domain;
 
 import jakarta.persistence.*;
+import lion.homepage.enums.RoleType;
 import lombok.Getter;
 
 @Entity
@@ -18,6 +19,9 @@ public class ProjectMember {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    private String projectRole;
+
+    // 멤버가 프로젝트에서 맡은 역할
+    @Enumerated(EnumType.STRING)
+    private RoleType projectRole;
 
 }

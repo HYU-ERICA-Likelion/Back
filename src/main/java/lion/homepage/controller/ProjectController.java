@@ -4,6 +4,7 @@ import lion.homepage.domain.Project;
 import lion.homepage.dto.ProjectResponseDto;
 import lion.homepage.dto.PhotoDto;
 import lion.homepage.dto.MemberDescriptionDto;
+import lion.homepage.enums.RoleType;
 import lion.homepage.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,15 +33,6 @@ public class ProjectController {
     @GetMapping("/{id}")
     public ResponseEntity<ProjectResponseDto> getProjectById(@PathVariable Long id) {
         Optional<Project> project = projectService.getProjectById(id);
-        return project.map(p -> ResponseEntity.ok(convertToDto(p)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/member")
-    public ResponseEntity<ProjectResponseDto> getProjectsByMemberNameAndGeneration(@RequestParam String name, @RequestParam Integer generation) {
-
-
-        Optional<Project> project = projectService.getProjectsByNameAndGeneration(name, generation);
         return project.map(p -> ResponseEntity.ok(convertToDto(p)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -74,14 +66,14 @@ public ResponseEntity<List<ProjectResponseDto>> getProjectsByGeneration(@PathVar
                 project.getName(),
                 project.getTeamName(),
                 project.getLongDescription(),
-                project.getType(),
+                project.getProjectType(),
                 generation,
                 project.getStartDate(),
                 project.getEndDate(),
                 project.getDeploymentUrl(),
                 project.getThumbnailUrl(),
                 project.getPhotos().stream().map(photo -> new PhotoDto(photo.getId(), photo.getPhotoUrl())).collect(Collectors.toList()),
-                project.getProjectMember().stream().map(pm -> new MemberDescriptionDto(pm.getId(),pm.getMember().getName(), pm.getMember().getRole(), pm.getMember().getPhotoUrl(), pm.getMember().getDescription())).collect(Collectors.toList())
+                project.getProjectMember().stream().map(pm -> new MemberDescriptionDto(pm.getId(), pm.getMember().getName(), List.of(pm.getProjectRole()), pm.getMember().getPhotoUrl(), pm.getMember().getDescription())).collect(Collectors.toList())
         );
     }
 }

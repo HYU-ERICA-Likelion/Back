@@ -1,7 +1,7 @@
 package lion.homepage.dto;
 
 import lion.homepage.domain.Interview;
-import lion.homepage.enums.Role;
+import lion.homepage.enums.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -14,6 +14,6 @@ public class MemberInterviewResponseDto {
     private String photoUrl;
     private String name;
 //    private Integer generation;
-    private Role role;
+    private List<RoleType> roles;
     private List<InterviewDto> interviewDtoList;
 }

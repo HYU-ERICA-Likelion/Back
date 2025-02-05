@@ -2,6 +2,7 @@ package lion.homepage.controller;
 
     import lion.homepage.domain.Member;
     import lion.homepage.dto.MemberDescriptionDto;
+    import lion.homepage.enums.RoleType;
     import lion.homepage.service.MemberService;
     import lombok.RequiredArgsConstructor;
     import org.springframework.http.ResponseEntity;
@@ -28,17 +29,20 @@ package lion.homepage.controller;
         }
 
         @GetMapping("/search")
-        public ResponseEntity<MemberDescriptionDto> getMemberByNameAndGeneration(@RequestParam Long id) {
+        public ResponseEntity<MemberDescriptionDto> getMemberById(@RequestParam Long id) {
             Optional<Member> member = memberService.findById(id);
             return member.map(m -> ResponseEntity.ok(convertToDto(m)))
                     .orElseGet(() -> ResponseEntity.notFound().build());
         }
 
         private MemberDescriptionDto convertToDto(Member member) {
+            List<RoleType> roles = member.getRoles().stream()
+                    .map(role -> RoleType.valueOf(role.getRoleType().name())).collect(Collectors.toList());
+
             return new MemberDescriptionDto(
                     member.getId(),
                     member.getName(),
-                    member.getRole(),
+                    roles,
                     member.getPhotoUrl(),
                     member.getDescription()
             );

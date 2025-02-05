@@ -1,5 +1,5 @@
 package lion.homepage.enums;
 
-public enum Type {
+public enum ProjectType {
     WEB, APP, AI, OTHER
 }

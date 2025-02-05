@@ -1,7 +1,6 @@
 package lion.homepage.domain;
 
 import jakarta.persistence.*;
-import lion.homepage.enums.Role;
 import lombok.Getter;
 
 import java.util.List;
@@ -17,12 +16,17 @@ public class Member {
 
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
     private String photoUrl;
 
     private String description;
+
+    @ManyToMany
+    @JoinTable(
+        name = "member_role",
+        joinColumns = @JoinColumn(name = "member_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<Role> roles = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
