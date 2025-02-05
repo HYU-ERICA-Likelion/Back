@@ -33,5 +33,9 @@ public class Generation {
     // 기수에 속한 멤버들
     @ManyToMany(mappedBy = "generations")
     private List<Member> members = new ArrayList<>();
+
+    public Integer getGeneration() {
+        return id;
+    }
 }
 

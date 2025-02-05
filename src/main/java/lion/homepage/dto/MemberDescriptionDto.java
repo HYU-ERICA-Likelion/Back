@@ -11,7 +11,8 @@ import java.util.List;
 public class MemberDescriptionDto {
     private Long id;
     private String name;
-//    private Integer generation;
+    private List<Integer> generations;
+
     private List<RoleType> roles;
     private String photoUrl;
     private String description;
