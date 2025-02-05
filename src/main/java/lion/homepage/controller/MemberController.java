@@ -28,16 +28,16 @@ package lion.homepage.controller;
         }
 
         @GetMapping("/search")
-        public ResponseEntity<MemberDescriptionDto> getMemberByNameAndGeneration(@RequestParam String name, @RequestParam Integer generation) {
-            Optional<Member> member = memberService.findMemberByNameAndGeneration(name, generation);
+        public ResponseEntity<MemberDescriptionDto> getMemberByNameAndGeneration(@RequestParam Long id) {
+            Optional<Member> member = memberService.findById(id);
             return member.map(m -> ResponseEntity.ok(convertToDto(m)))
                     .orElseGet(() -> ResponseEntity.notFound().build());
         }
 
         private MemberDescriptionDto convertToDto(Member member) {
             return new MemberDescriptionDto(
+                    member.getId(),
                     member.getName(),
-                    member.getGeneration(),
                     member.getRole(),
                     member.getPhotoUrl(),
                     member.getDescription()

@@ -13,7 +13,7 @@ public class MemberInterviewResponseDto {
 
     private String photoUrl;
     private String name;
-    private Integer generation;
+//    private Integer generation;
     private Role role;
     private List<InterviewDto> interviewDtoList;
 }

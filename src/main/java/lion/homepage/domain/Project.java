@@ -31,8 +31,6 @@ public class Project {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    private Integer generation;
-
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
@@ -40,6 +38,13 @@ public class Project {
     private String deploymentUrl;
 
     private String thumbnailUrl;
+
+    
+    // 단일 기수 가정
+    // 여러 프로젝트가 하나의 기수에 속할 수 있음 (N:1)
+    @ManyToOne
+    @JoinColumn(name = "generation_id")
+    private Generation generation;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
     private List<Photo> photos = new ArrayList<>();

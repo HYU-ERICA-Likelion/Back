@@ -38,6 +38,8 @@ public class ProjectController {
 
     @GetMapping("/member")
     public ResponseEntity<ProjectResponseDto> getProjectsByMemberNameAndGeneration(@RequestParam String name, @RequestParam Integer generation) {
+
+
         Optional<Project> project = projectService.getProjectsByNameAndGeneration(name, generation);
         return project.map(p -> ResponseEntity.ok(convertToDto(p)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
@@ -65,19 +67,21 @@ public ResponseEntity<List<ProjectResponseDto>> getProjectsByGeneration(@PathVar
     }
 
     private ProjectResponseDto convertToDto(Project project) {
+        Integer generation = project.getGeneration().getId();
+
         return new ProjectResponseDto(
                 project.getId(),
                 project.getName(),
                 project.getTeamName(),
                 project.getLongDescription(),
                 project.getType(),
-                project.getGeneration(),
+                generation,
                 project.getStartDate(),
                 project.getEndDate(),
                 project.getDeploymentUrl(),
                 project.getThumbnailUrl(),
                 project.getPhotos().stream().map(photo -> new PhotoDto(photo.getId(), photo.getPhotoUrl())).collect(Collectors.toList()),
-                project.getProjectMember().stream().map(pm -> new MemberDescriptionDto(pm.getMember().getName(), pm.getMember().getGeneration(), pm.getMember().getRole(), pm.getMember().getPhotoUrl(), pm.getMember().getDescription())).collect(Collectors.toList())
+                project.getProjectMember().stream().map(pm -> new MemberDescriptionDto(pm.getId(),pm.getMember().getName(), pm.getMember().getRole(), pm.getMember().getPhotoUrl(), pm.getMember().getDescription())).collect(Collectors.toList())
         );
     }
 }

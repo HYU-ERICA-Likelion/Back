@@ -31,17 +31,19 @@ public class InterviewController {
 
     private final MemberService memberService;
 
+    
+    // 멤버 ID로 인터뷰 반환
     @GetMapping("/interview")
     @ResponseBody
     public ResponseEntity<?> getPersonalInterviews(MemberInterviewRequestDto memberInterviewRequestDto) {
-        Optional<Member> optionalMember = memberService.findMemberByNameAndGeneration(memberInterviewRequestDto.getName(), memberInterviewRequestDto.getGeneration());
+        Optional<Member> optionalMember = memberService.findById(memberInterviewRequestDto.getId());
         if (!optionalMember.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Member Not Found"));
         }
         Member member = optionalMember.get();
         List<InterviewDto> interviewDtoList = member.getInterviews().stream()
                 .map(i -> new InterviewDto(i.getQuestion(), i.getAnswer())).toList();
-        return ResponseEntity.ok(new MemberInterviewResponseDto(member.getPhotoUrl(), member.getName(), member.getGeneration(), member.getRole(), interviewDtoList));
+        return ResponseEntity.ok(new MemberInterviewResponseDto(member.getPhotoUrl(), member.getName(), member.getRole(), interviewDtoList));
     }
 
     @GetMapping("generation/interview")
@@ -49,7 +51,7 @@ public class InterviewController {
     public ResponseEntity<List<MemberDescriptionDto>> getEveryMemberDescription() {
         List<Member> members = memberService.findAll();
         List<MemberDescriptionDto> memberDescriptionDtoList = members.stream()
-                .map(m -> new MemberDescriptionDto(m.getName(), m.getGeneration(), m.getRole(), m.getPhotoUrl(), m.getDescription())).toList();
+                .map(m -> new MemberDescriptionDto(m.getId(), m.getName(), m.getRole(), m.getPhotoUrl(), m.getDescription())).toList();
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(60, TimeUnit.SECONDS))
                 .body(memberDescriptionDtoList);

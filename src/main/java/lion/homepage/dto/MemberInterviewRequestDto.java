@@ -8,6 +8,5 @@ import org.antlr.v4.runtime.misc.NotNull;
 @AllArgsConstructor
 public class MemberInterviewRequestDto {
 
-    private String name;
-    private Integer generation;
+    private Long id; // 멤버 번호
 }

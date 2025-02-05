@@ -7,8 +7,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class MemberDescriptionDto {
+    private Long id;
     private String name;
-    private Integer generation;
+//    private Integer generation;
     private Role role;
     private String photoUrl;
     private String description;
