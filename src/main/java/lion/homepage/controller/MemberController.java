@@ -2,10 +2,12 @@ package lion.homepage.controller;
 
     import lion.homepage.domain.Generation;
     import lion.homepage.domain.Member;
+    import lion.homepage.domain.Role;
     import lion.homepage.dto.MemberDescriptionDto;
     import lion.homepage.enums.RoleType;
     import lion.homepage.service.MemberService;
     import lombok.RequiredArgsConstructor;
+    import org.springframework.context.support.BeanDefinitionDsl;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
 
@@ -37,9 +39,10 @@ package lion.homepage.controller;
         }
         
         //기수별로 멤버 조회 추가해야함
-        @GetMapping("/generation/{generation}")
+        // 프론트에서 운영진 정보 다 넘겨주면 알아서 기수로 필터링해서 출력하는 방식이어서 운영진 멤버 전체 보내주면 될 것 같아요
+        @GetMapping("/generation")
         public ResponseEntity<List<MemberDescriptionDto>> getMembersByGeneration(@PathVariable Integer generation) {
-            List<Member> members = memberService.getMembersByGeneration(generation);
+            List<Member> members = memberService.getLeaderMembersOrderByRole();
             List<MemberDescriptionDto> memberDtos = members.stream()
                     .map(this::convertToDto)
                     .collect(Collectors.toList());
@@ -47,8 +50,8 @@ package lion.homepage.controller;
         }
 
         private MemberDescriptionDto convertToDto(Member member) {
-            List<RoleType> roles = member.getRoles().stream()
-                    .map(role -> RoleType.valueOf(role.getRoleType().name())).collect(Collectors.toList());
+            List<String> roles = member.getRoles().stream()
+                    .map(role -> role.getRoleType().getKorean()).collect(Collectors.toList());
 
             List<Integer> generations = member.getGenerations().stream()
                     .map(Generation::getGeneration).collect(Collectors.toList());

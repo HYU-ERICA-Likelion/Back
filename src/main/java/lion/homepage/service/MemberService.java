@@ -30,6 +30,10 @@ public class MemberService {
         return memberRepository.findByGenerationsId(generation);
     }
 
+    public List<Member> getLeaderMembersOrderByRole() {
+        return memberRepository.findLeaderMembersOrderedByRole();
+    }
+
 
     // 멤버가 기수 여러개 가질 수 있음 -> 멤버와 기수로 멤버 찾기하면 여러개가 나옴 -> 삭제
 //    public Optional<Member> findMemberByNameAndGeneration(String name, Integer generationId) {
