@@ -19,7 +19,7 @@ public class Role {
     @Column(name = "role_id")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     private RoleType roleType;
 }

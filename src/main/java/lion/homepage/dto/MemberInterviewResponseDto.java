@@ -13,7 +13,6 @@ public class MemberInterviewResponseDto {
 
     private String photoUrl;
     private String name;
-//    private Integer generation;
     private List<RoleType> roles;
     private List<InterviewDto> interviewDtoList;
 }

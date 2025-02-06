@@ -13,7 +13,7 @@ public class MemberDescriptionDto {
     private String name;
     private List<Integer> generations;
 
-    private List<RoleType> roles;
+    private List<String> roles;
     private String photoUrl;
     private String description;
 }

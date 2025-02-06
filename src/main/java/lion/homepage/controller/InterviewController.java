@@ -48,15 +48,4 @@ public class InterviewController {
                     .map(role -> RoleType.valueOf(role.getRoleType().name())).collect(Collectors.toList());
         return ResponseEntity.ok(new MemberInterviewResponseDto(member.getPhotoUrl(), member.getName(), roles, interviewDtoList));
     }
-//    // 모든 멤버의 인터뷰 반환
-//    @GetMapping("generation/interview")
-//    @ResponseBody
-//    public ResponseEntity<List<MemberDescriptionDto>> getEveryMemberDescription() {
-//        List<Member> members = memberService.findAll();
-//        List<MemberDescriptionDto> memberDescriptionDtoList = members.stream()
-//                .map(m -> new MemberDescriptionDto(m.getId(), m.getName(), m.getRole(), m.getPhotoUrl(), m.getDescription())).toList();
-//        return ResponseEntity.ok()
-//                .cacheControl(CacheControl.maxAge(60, TimeUnit.SECONDS))
-//                .body(memberDescriptionDtoList);
-//    }
 }
