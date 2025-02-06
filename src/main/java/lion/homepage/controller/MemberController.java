@@ -22,6 +22,7 @@ package lion.homepage.controller;
 
         private final MemberService memberService;
 
+        // 모든 멤버 반환
         @GetMapping
         public ResponseEntity<List<MemberDescriptionDto>> getAllMembers() {
             List<Member> members = memberService.findAll();
@@ -31,15 +32,16 @@ package lion.homepage.controller;
             return ResponseEntity.ok(memberDtos);
         }
 
+
+        // 멤버 ID로 멤버 반환
         @GetMapping("/search")
         public ResponseEntity<MemberDescriptionDto> getMemberById(@RequestParam Long id) {
             Optional<Member> member = memberService.findById(id);
             return member.map(m -> ResponseEntity.ok(convertToDto(m)))
                     .orElseGet(() -> ResponseEntity.notFound().build());
         }
-        
-        //기수별로 멤버 조회 추가해야함
-        // 프론트에서 운영진 정보 다 넘겨주면 알아서 기수로 필터링해서 출력하는 방식이어서 운영진 멤버 전체 보내주면 될 것 같아요
+
+        // 모든 멤버 중 리더 멤버만 반환
         @GetMapping("/generation")
         public ResponseEntity<List<MemberDescriptionDto>> getMembersByGeneration() {
             List<Member> members = memberService.getLeaderMembersOrderByRole();

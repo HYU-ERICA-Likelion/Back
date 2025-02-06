@@ -23,6 +23,7 @@ public class ProjectController {
 
     private final ProjectService projectService;
 
+    // 모든 프로젝트 반환
     @GetMapping
     public ResponseEntity<List<ProjectResponseDto>> getAllProjects() {
         List<Project> projects = projectService.getAllProjects();
@@ -32,6 +33,7 @@ public class ProjectController {
         return ResponseEntity.ok(projectDtos);
     }
 
+    // 프로젝트 ID로 프로젝트 반환
     @GetMapping("/{id}")
     public ResponseEntity<ProjectResponseDto> getProjectById(@PathVariable Long id) {
         Optional<Project> project = projectService.getProjectById(id);
@@ -39,21 +41,25 @@ public class ProjectController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-@GetMapping("/generation/{generation}")
-public ResponseEntity<List<ProjectResponseDto>> getProjectsByGeneration(@PathVariable Integer generation) {
-    List<Project> projects = projectService.getProjectsByGeneration(generation);
-    List<ProjectResponseDto> projectDtos = projects.stream()
-            .map(this::convertToDto)
-            .collect(Collectors.toList());
-    return ResponseEntity.ok(projectDtos);
-}
+    // 기수로 프로젝트 반환
+    @GetMapping("/generation/{generation}")
+    public ResponseEntity<List<ProjectResponseDto>> getProjectsByGeneration(@PathVariable Integer generation) {
+        List<Project> projects = projectService.getProjectsByGeneration(generation);
+        List<ProjectResponseDto> projectDtos = projects.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(projectDtos);
+    }
 
+    // 프로젝트 생성
+    // TODO : 프로젝트 생성 시 photo도 함께 생성 (cloud storage에 저장)
     @PostMapping
     public ResponseEntity<ProjectResponseDto> createProject(@RequestBody Project project) {
         Project savedProject = projectService.saveProject(project);
         return ResponseEntity.status(201).body(convertToDto(savedProject));
     }
 
+    // 프로젝트 수정
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
         projectService.deleteProject(id);
