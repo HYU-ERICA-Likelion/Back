@@ -2,6 +2,7 @@ package lion.homepage.controller;
 
 import lion.homepage.domain.Project;
 import lion.homepage.domain.Generation;
+import lion.homepage.dto.ProjectMemberDto;
 import lion.homepage.dto.ProjectResponseDto;
 import lion.homepage.dto.PhotoDto;
 import lion.homepage.dto.MemberDescriptionDto;
@@ -74,7 +75,8 @@ public ResponseEntity<List<ProjectResponseDto>> getProjectsByGeneration(@PathVar
                 project.getDeploymentUrl(),
                 project.getThumbnailUrl(),
                 project.getPhotos().stream().map(photo -> new PhotoDto(photo.getId(), photo.getPhotoUrl())).collect(Collectors.toList()),
-                project.getProjectMember().stream().map(pm -> new MemberDescriptionDto(pm.getMember().getId(), pm.getMember().getName(), pm.getMember().getGenerations().stream().map(Generation::getGeneration).collect(Collectors.toList()), List.of(pm.getProjectRole()), pm.getMember().getPhotoUrl(), pm.getMember().getDescription())).collect(Collectors.toList())
+                project.getProjectMember().stream().map(pm -> new ProjectMemberDto(pm.getMember().getId(), pm.getMember().getName(), pm.getProjectRole().getKorean())).collect(Collectors.toList())
+                        //map(pm -> new MemberDescriptionDto(pm.getMember().getId(), pm.getMember().getName(), pm.getMember().getGenerations().stream().map(Generation::getGeneration).collect(Collectors.toList()), List.of(pm.getProjectRole()), pm.getMember().getPhotoUrl(), pm.getMember().getDescription())).collect(Collectors.toList())
         );
     }
 }

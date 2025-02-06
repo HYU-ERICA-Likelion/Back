@@ -21,5 +21,5 @@ public class ProjectResponseDto {
     private String deploymentUrl;
     private String thumbnailUrl;
     private List<PhotoDto> photos;
-    private List<MemberDescriptionDto> projectMembers;
+    private List<ProjectMemberDto> projectMembers;
 }

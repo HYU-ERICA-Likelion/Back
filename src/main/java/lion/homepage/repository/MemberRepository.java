@@ -13,6 +13,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByNameAndGenerationsId(String name, Integer generationId);
     List<Member> findByGenerationsId(Integer generationId);
 
-    @Query("SELECT DISTINCT m FROM Member m JOIN m.roles r WHERE r.roleType != 8 ORDER BY r.roleType, m.id ASC")
+    @Query("SELECT DISTINCT m, r.roleType FROM Member m JOIN m.roles r WHERE r.roleType != 8 ORDER BY r.roleType, m.id ASC")
     List<Member> findLeaderMembersOrderedByRole();
 }
