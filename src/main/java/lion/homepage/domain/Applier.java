@@ -5,19 +5,16 @@ import lombok.Getter;
 
 @Entity
 @Getter
-public class Curriculum {
+public class Applier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "curriculum_id")
     private Long id;
 
-    private String title;
+    private String nickname;
 
-    private String description;
-
-    private Integer week;
+    private String part;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "part_id")
-    private Part part;
+    @JoinColumn(name = "idea_post_id")
+    private IdeaPost ideaPost;
 }
