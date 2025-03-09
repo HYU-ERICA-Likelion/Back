@@ -23,5 +23,4 @@ public class ProjectMember {
     // 멤버가 프로젝트에서 맡은 역할
     @Enumerated(EnumType.STRING)
     private RoleType projectRole;
-
 }

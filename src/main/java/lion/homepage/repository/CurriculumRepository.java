@@ -3,7 +3,6 @@ package lion.homepage.repository;
 import lion.homepage.domain.Curriculum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository

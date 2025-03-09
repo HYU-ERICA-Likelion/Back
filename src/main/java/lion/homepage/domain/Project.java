@@ -39,12 +39,7 @@ public class Project {
 
     private String thumbnailUrl;
 
-    
-    // 단일 기수 가정
-    // 여러 프로젝트가 하나의 기수에 속할 수 있음 (N:1)
-    @ManyToOne
-    @JoinColumn(name = "generation_id")
-    private Generation generation;
+    private Integer generation;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.REMOVE)
     private List<Photo> photos = new ArrayList<>();
