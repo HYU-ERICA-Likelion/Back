@@ -24,9 +24,9 @@ public class MemberService {
     public Optional<Member> findById(Long id) {
         return memberRepository.findById(id);
     }
-    public List<Member> getMembersByGeneration(Integer generation) {
-        return memberRepository.findByGenerationsId(generation);
-    }
+//    public List<Member> getMembersByGeneration(Integer generation) {
+//        return memberRepository.findByGenerationsId(generation);
+//    }
 
     public List<Member> getLeaderMembersOrderByRole() {
         return memberRepository.findLeaderMembersOrderedByRole();

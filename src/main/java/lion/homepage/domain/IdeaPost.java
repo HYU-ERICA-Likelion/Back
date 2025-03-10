@@ -26,6 +26,6 @@ public class IdeaPost {
 
     private Integer designAppNum;
 
-    @OneToMany(mappedBy = "idea_post", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "ideaPost", cascade = CascadeType.REMOVE)
     private List<Applier> appliers = new ArrayList<>();
 }

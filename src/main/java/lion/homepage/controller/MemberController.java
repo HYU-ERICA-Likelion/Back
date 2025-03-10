@@ -1,8 +1,7 @@
 package lion.homepage.controller;
 
-    import lion.homepage.domain.Generation;
+    import lion.homepage.domain.GenerationRole;
     import lion.homepage.domain.Member;
-    import lion.homepage.domain.Role;
     import lion.homepage.dto.MemberDescriptionDto;
     import lion.homepage.enums.RoleType;
     import lion.homepage.service.MemberService;
@@ -52,11 +51,11 @@ package lion.homepage.controller;
         }
 
         private MemberDescriptionDto convertToDto(Member member) {
-            List<String> roles = member.getRoles().stream()
-                    .map(role -> role.getRoleType().getKorean()).collect(Collectors.toList());
+            List<String> roles = member.getGenerationRoles().stream()
+                    .map(role -> role.getRole().getKorean()).collect(Collectors.toList());
 
-            List<Integer> generations = member.getGenerations().stream()
-                    .map(Generation::getGeneration).collect(Collectors.toList());
+            List<Integer> generations = member.getGenerationRoles().stream()
+                    .map(GenerationRole::getGeneration).collect(Collectors.toList());
 
             return new MemberDescriptionDto(
                     member.getId(),

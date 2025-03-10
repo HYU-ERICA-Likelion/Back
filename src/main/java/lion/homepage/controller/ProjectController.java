@@ -1,7 +1,6 @@
 package lion.homepage.controller;
 
 import lion.homepage.domain.Project;
-import lion.homepage.domain.Generation;
 import lion.homepage.dto.ProjectMemberDto;
 import lion.homepage.dto.ProjectResponseDto;
 import lion.homepage.dto.PhotoDto;
@@ -41,15 +40,15 @@ public class ProjectController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // 기수로 프로젝트 반환
-    @GetMapping("/generation/{generation}")
-    public ResponseEntity<List<ProjectResponseDto>> getProjectsByGeneration(@PathVariable Integer generation) {
-        List<Project> projects = projectService.getProjectsByGeneration(generation);
-        List<ProjectResponseDto> projectDtos = projects.stream()
-                .map(this::convertToDto)
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(projectDtos);
-    }
+//    // 기수로 프로젝트 반환
+//    @GetMapping("/generation/{generation}")
+//    public ResponseEntity<List<ProjectResponseDto>> getProjectsByGeneration(@PathVariable Integer generation) {
+//        List<Project> projects = projectService.getProjectsByGeneration(generation);
+//        List<ProjectResponseDto> projectDtos = projects.stream()
+//                .map(this::convertToDto)
+//                .collect(Collectors.toList());
+//        return ResponseEntity.ok(projectDtos);
+//    }
 
     // 프로젝트 생성
     // TODO : 프로젝트 생성 시 photo도 함께 생성 (cloud storage에 저장)
@@ -67,7 +66,7 @@ public class ProjectController {
     }
 
     private ProjectResponseDto convertToDto(Project project) {
-        Integer generation = project.getGeneration().getId();
+        Integer generation = project.getGeneration();
 
         return new ProjectResponseDto(
                 project.getId(),
