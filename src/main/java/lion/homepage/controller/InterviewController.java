@@ -38,14 +38,14 @@ public class InterviewController {
     @ResponseBody
     public ResponseEntity<?> getPersonalInterviews(MemberInterviewRequestDto memberInterviewRequestDto) {
         Optional<Member> optionalMember = memberService.findById(memberInterviewRequestDto.getId());
-        if (!optionalMember.isPresent()) {
+        if (optionalMember.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Member Not Found"));
         }
         Member member = optionalMember.get();
         List<InterviewDto> interviewDtoList = member.getInterviews().stream()
                 .map(i -> new InterviewDto(i.getQuestion(), i.getAnswer())).toList();
-        List<RoleType> roles = member.getRoles().stream()
-                    .map(role -> RoleType.valueOf(role.getRoleType().name())).collect(Collectors.toList());
+        List<RoleType> roles = member.getGenerationRoles().stream()
+                    .map(role -> RoleType.valueOf(role.getRole().name())).collect(Collectors.toList());
         return ResponseEntity.ok(new MemberInterviewResponseDto(member.getPhotoUrl(), member.getName(), roles, interviewDtoList));
     }
 }

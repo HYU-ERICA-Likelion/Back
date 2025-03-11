@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
-    Optional<Project> findByNameAndGenerationId(String name, Integer generationId);
-    List<Project> findByGenerationId(Integer generationId);
+//    Optional<Project> findByNameAndGenerationId(String name, Integer generationId);
+//    List<Project> findByGenerationId(Integer generationId);
 
 
 }

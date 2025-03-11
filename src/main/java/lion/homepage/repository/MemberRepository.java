@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    Optional<Member> findByNameAndGenerationsId(String name, Integer generationId);
-    List<Member> findByGenerationsId(Integer generationId);
+//    Optional<Member> findByNameAndGenerationsId(String name, Integer generationId);
+//    List<Member> findByGenerationsId(Integer generationId);
 
-    @Query("SELECT DISTINCT m, r.roleType FROM Member m JOIN m.roles r WHERE r.roleType != 8 ORDER BY r.roleType, m.id ASC")
+    @Query("SELECT DISTINCT m, r.role FROM Member m JOIN m.generationRoles r ORDER BY r.role, m.id ASC")
     List<Member> findLeaderMembersOrderedByRole();
 }
