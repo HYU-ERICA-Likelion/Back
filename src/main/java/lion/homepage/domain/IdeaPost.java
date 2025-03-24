@@ -1,10 +1,12 @@
 package lion.homepage.domain;
 
 import jakarta.persistence.*;
+import lion.homepage.enums.ProjectType;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -18,12 +20,22 @@ public class IdeaPost {
 
     private String description;
 
+    private String nickname;
+
     private String groupChatLink;
 
+    private String imageUrl;
+
+    @Enumerated(EnumType.STRING)
+    private ProjectType projectType;
+
+    @Setter
     private Integer backendAppNum;
 
+    @Setter
     private Integer frontendAppNum;
 
+    @Setter
     private Integer designAppNum;
 
     @OneToMany(mappedBy = "ideaPost", cascade = CascadeType.REMOVE)
