@@ -40,7 +40,8 @@ public class MemberService {
         List<String> frontendMembers = getFrontendMemberNames(memberRoleDtoList);
         List<String> planningMembers = getPlanningMemberNames(memberRoleDtoList);
 
-        RandomTeamMakerResultDto randomTeamMakerResultDto = new RandomTeamMakerResultDto();
+        List<TeamDto> teamDtoList = new ArrayList<>();
+        RandomTeamMakerResultDto randomTeamMakerResultDto = new RandomTeamMakerResultDto(teamDtoList);
         for(int i = 0; randomTeamRequestDto.getTeamList().size() > i; i++) {
             randomTeamMakerResultDto.getTeamDtoList().add(getRadomTeamDto(randomTeamRequestDto.getTeamList().get(i), backendMembers, frontendMembers, planningMembers));
 
@@ -67,7 +68,7 @@ public class MemberService {
         return String.join(", ", nameList);
     }
 
-    private int getRandomIndex(List<?> memberList) {
+    private int getRandomIndex(List<String> memberList) {
         Random random = new Random();
         return random.nextInt(memberList.size());
     }

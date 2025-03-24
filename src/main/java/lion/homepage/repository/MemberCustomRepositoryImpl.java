@@ -2,10 +2,12 @@ package lion.homepage.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import lion.homepage.domain.Member;
 import lion.homepage.dto.MemberRoleDto;
+import lion.homepage.enums.RoleType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import javax.management.relation.Role;
 
 import static lion.homepage.domain.QGenerationRole.generationRole;
 import static lion.homepage.domain.QMember.member;
@@ -24,8 +26,8 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
                         member.name,
                         generationRole.role))
                 .from(member)
-                .innerJoin(generationRole)
-                .where(generationRole.role.ordinal().goe(8))
+                .innerJoin(generationRole).on(member.id.eq(generationRole.id))
+                .where(generationRole.role.in(RoleType.NormalBackendMember, RoleType.NormalFrontendMember, RoleType.NormalPlanningMember))
                 .fetch();
     }
 }

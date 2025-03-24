@@ -8,9 +8,6 @@ import java.util.List;
 
 @AllArgsConstructor
 @Getter
-@NoArgsConstructor
 public class RandomTeamMakerResultDto {
     List<TeamDto> teamDtoList;
-
-
 }
