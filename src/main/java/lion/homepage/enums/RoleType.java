@@ -17,7 +17,9 @@ public enum RoleType {
 
     ProjectManager("프로젝트 매니저"), // 프로젝트 매니저
 
-    NormalMember("아기사자");
+    NormalPlanningMember("기획/디자인 아기사자"),
+    NormalFrontendMember("프론트엔드 아기사자"),
+    NormalBackendMember("백엔드 아기사자");
 
     private final String korean;
 
