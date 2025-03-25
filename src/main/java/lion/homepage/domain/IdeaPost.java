@@ -22,6 +22,8 @@ public class IdeaPost {
 
     private String nickname;
 
+    private String selectedPart;
+
     private String groupChatLink;
 
     private String imageUrl;
