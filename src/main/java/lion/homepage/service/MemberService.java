@@ -31,7 +31,7 @@ public class MemberService {
 //    }
 
     public List<Member> getLeaderMembersOrderByRole() {
-        return memberRepository.findLeaderMembersOrderedByRole();
+        return memberRepository.findLeaderMembers();
     }
 
     public RandomTeamMakerResultDto makeTeam(RandomTeamRequestDto randomTeamRequestDto) {

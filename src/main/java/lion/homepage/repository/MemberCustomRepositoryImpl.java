@@ -2,6 +2,7 @@ package lion.homepage.repository;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import lion.homepage.domain.Member;
 import lion.homepage.dto.MemberRoleDto;
 import lion.homepage.enums.RoleType;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,16 @@ public class MemberCustomRepositoryImpl implements MemberCustomRepository {
                 .from(member)
                 .innerJoin(generationRole).on(member.id.eq(generationRole.id))
                 .where(generationRole.role.in(RoleType.NormalBackendMember, RoleType.NormalFrontendMember, RoleType.NormalPlanningMember))
+                .fetch();
+    }
+
+    @Override
+    public List<Member> findLeaderMembers() {
+        return jpaQueryFactory
+                .select(member)
+                .from(member)
+                .innerJoin(generationRole).on(member.id.eq(generationRole.id))
+                .where(generationRole.role.notIn(RoleType.NormalBackendMember, RoleType.NormalFrontendMember, RoleType.NormalPlanningMember))
                 .fetch();
     }
 }
