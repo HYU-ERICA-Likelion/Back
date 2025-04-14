@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 @RestController
 @RequiredArgsConstructor
 public class TeamMakerController {
@@ -23,11 +25,15 @@ public class TeamMakerController {
     private final MemberService memberService;
 
     @GetMapping("teams/enter")
-    public ResponseEntity<String> receiveCode(@RequestBody CodeRequestDto codeRequestDto) {
+    public ResponseEntity<HashMap<String, String>> receiveCode(@RequestBody CodeRequestDto codeRequestDto) {
         if (securityCodeService.findByCode(codeRequestDto.getCode())) {
-            return ResponseEntity.ok("Code is matched");
+            HashMap<String, String> map = new HashMap<>();
+            map.put("response", "pass");
+            return ResponseEntity.ok(map);
         } else {
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Code is wrong");
+            HashMap<String, String> map = new HashMap<>();
+            map.put("response", "fail");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(map);
         }
     }
 
