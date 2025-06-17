@@ -24,7 +24,7 @@ public class TeamMakerController {
     private final SecurityCodeService securityCodeService;
     private final MemberService memberService;
 
-    @GetMapping("teams/enter")
+    @PostMapping("teams/enter")
     public ResponseEntity<HashMap<String, String>> receiveCode(@RequestBody CodeRequestDto codeRequestDto) {
         if (securityCodeService.findByCode(codeRequestDto.getCode())) {
             HashMap<String, String> map = new HashMap<>();
